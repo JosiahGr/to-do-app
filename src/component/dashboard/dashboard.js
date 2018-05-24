@@ -22,12 +22,20 @@ export default class Dashboard extends React.Component {
     }
 
     note.createdOn = new Date();
-    note.id = uuid();
 
     return this.setState((previousState) => {
       return {
-        notes: [...previousState.notes, note],
+        notes: [...previousState.notes, { ...note, id: uuid() }],
         error: null,
+      };
+    });
+  }
+
+  handleRemoveNote(noteToRemove) {
+    return this.setState((previousState) => {
+      return {
+        notes: previousState.notes.filter(note =>
+          note.id !== noteToRemove.id),
       };
     });
   }
@@ -39,9 +47,12 @@ export default class Dashboard extends React.Component {
         <NoteForm
           handleAddNote={this.handleAddNote} 
         />
-        { this.state.error && <h2 className="error">You must enter a title.</h2> }
         <p> All notes: </p>
-        <NoteList notes={this.state.notes} />
+        <NoteList
+        notes={this.state.notes}
+        handleRemoveNote={this.handleRemoveNote}
+        />
+        { this.state.error && <h2 className="error">You must enter a title.</h2> }
       </section>
     );
   }
