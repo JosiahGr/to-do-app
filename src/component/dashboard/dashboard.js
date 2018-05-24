@@ -1,50 +1,44 @@
 import React from 'react';
 import uuid from 'uuid/v4';
-// import ExpenseForm from './../expense-form/index';
-import autoBind from '../../../utils';
+import NoteForm from '../noteForm/noteForm';
+import autoBind from '../../utils';
 
 export default class Dashboard extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      expenses: [],
+      notes: [],
       error: null,
     };
 
     autoBind.call(this, Dashboard);
   }
 
-  handleAddExpense(expense) {
-    if (expense.title === '') {
+  handleAddNote(note) {
+    if (note.title === '') {
       return this.setState({ error: true });
     }
 
-    expense.createdOn = new Date();
-    expense.id = uuid();
+    note.createdOn = new Date();
+    note.id = uuid();
 
     return this.setState((previousState) => {
       return {
-        expenses: [...previousState.expenses, expense],
+        notes: [...previousState.notes, note],
         error: null,
       };
     });
   }
 
-  handleTotalPrice() {
-    return this.state.expenses.reduce((sum, expense) => {
-      return sum + Number(expense.price);
-    }, 0);
-  }
-
-  handleExpensesList() {
+  handleNotesList() {
     return (
       <ul>
         {
-          this.state.expenses.map((expense) => {
+          this.state.notes.map((note) => {
             return (
-              <li key={expense.id}>
-                {expense.title} : ${expense.price}
+              <li key={note.id}>
+              {note.title} : {note.content}
               </li>
             );
           })
@@ -56,13 +50,13 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <section className="dashboard">
-        <h1>Budget Tracker Dashboard</h1>
-        <ExpenseForm 
-          handleAddExpense={this.handleAddExpense} 
+        <h1>Dashboard</h1>
+        <NoteForm
+          handleAddNote={this.handleAddNote} 
         />
         { this.state.error && <h2 className="error">You must enter a title.</h2> }
-        { this.handleExpensesList() }
-        <p> Your total costs are: ${ this.handleTotalPrice() }</p>
+        { this.handleNotesList(this.state) }
+        <p> All notes: { this.handleNotesList(this.state) }</p>
       </section>
     );
   }

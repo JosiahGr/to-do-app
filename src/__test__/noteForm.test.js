@@ -1,13 +1,13 @@
 import React from 'react';
 import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Dashboard from './../component/dashboard/dashboard';
+import NoteForm from './../component/noteForm/noteForm';
 
 configure({ adapter: new Adapter() });
 
-describe('Dashboard testing', () => {
+describe('NoteForm testing', () => {
   test('Simple test for initial state', () => {
-    const mountedDashboard = mount(<Dashboard />);
-    expect(mountedDashboard.state('notes')).toEqual([]);
+    const mountedNoteForm = mount(<NoteForm />);
+    expect(mountedNoteForm.state('title')).toEqual('');
   });
 });

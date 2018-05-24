@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
-import Dashboard from './../dashboard/index';
+import Dashboard from '../dashboard/dashboard';
+import Landing from '../landing/landing';
 import '../../styles/main.scss';
 
 export default class App extends React.Component {
@@ -10,18 +11,18 @@ export default class App extends React.Component {
         <BrowserRouter>
           <div>
             <header>
-              <h1>Budget Tracker</h1>
+              <h1>TO-DO APP</h1>
               <nav>
                 <ul>
-                  <li><Link to="/">Home</Link></li>
+                  <li><Link to="/">Landing</Link></li>
                   <li><Link to="/dashboard">Dashboard</Link></li>
                 </ul>
               </nav>
             </header>
-            <Route 
+            <Route
               exact
               path="/"
-              component={() => <h1>I am your landing page!</h1>}
+              component={Landing}
             />
             <Route 
               exact
