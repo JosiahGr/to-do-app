@@ -4,7 +4,7 @@ import autoBind from './../../utils';
 export default class NoteForm extends React.Component {
   constructor(props) {
     super(props);
-
+    
     this.state = {
       title: '',
       content: '',

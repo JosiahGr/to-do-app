@@ -1,6 +1,7 @@
 import React from 'react';
 import uuid from 'uuid/v4';
 import NoteForm from '../noteForm/noteForm';
+import NoteList from '../noteList/noteList';
 import autoBind from '../../utils';
 
 export default class Dashboard extends React.Component {
@@ -31,22 +32,6 @@ export default class Dashboard extends React.Component {
     });
   }
 
-  handleNotesList() {
-    return (
-      <ul>
-        {
-          this.state.notes.map((note) => {
-            return (
-              <li key={note.id}>
-              {note.title} : {note.content}
-              </li>
-            );
-          })
-        }
-      </ul>
-    );
-  }
-
   render() {
     return (
       <section className="dashboard">
@@ -55,8 +40,8 @@ export default class Dashboard extends React.Component {
           handleAddNote={this.handleAddNote} 
         />
         { this.state.error && <h2 className="error">You must enter a title.</h2> }
-        { this.handleNotesList(this.state) }
-        <p> All notes: { this.handleNotesList(this.state) }</p>
+        <p> All notes: </p>
+        <NoteList notes={this.state.notes} />
       </section>
     );
   }
