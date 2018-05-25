@@ -2,15 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import autoBind from './../../utils';
 
+const emptyState = {
+  title: '',
+  content: '',
+};
+
 export default class NoteForm extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.state = {
-      title: '',
-      content: '',
-    };
-
+    this.state = this.props.note ? this.props.note : emptyState;
+  
     autoBind.call(this, NoteForm);
   }
 
@@ -44,7 +45,7 @@ export default class NoteForm extends React.Component {
           value={this.state.content}
           onChange={this.handleChange}
         />
-        <button type="submit">{buttonText} Create Note</button>
+        <button type="submit">{buttonText} Note</button>
       </form>
     );
   }

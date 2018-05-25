@@ -43,7 +43,7 @@ export default class Dashboard extends React.Component {
   handleUpdateNote(noteToUpdate) {
     return this.setState((previousState) => {
       return {
-        note: previousState.notes.map(note =>
+        notes: previousState.notes.map(note =>
           (note.id === noteToUpdate.id ? noteToUpdate : note)),
       };
     });
@@ -54,7 +54,7 @@ export default class Dashboard extends React.Component {
       <section className="dashboard">
         <h1>Dashboard</h1>
         <NoteForm
-          handleAddNote={this.handleAddNote} 
+          handleComplete={this.handleAddNote} 
         />
         <p> All notes: </p>
         <NoteList
