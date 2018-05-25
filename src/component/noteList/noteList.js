@@ -2,7 +2,7 @@ import React from 'react';
 import NoteItem from '../noteItem/noteItem';
 import autoBind from '../../utils/index';
 
-export default class NoteList extends React.Component {
+class NoteList extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,12 +14,14 @@ export default class NoteList extends React.Component {
       {
         this.props.notes.map((note) => {
           return (
+            <li key={note.id}>
             <NoteItem
-            key={note.id}
             note={note}
             id={note.id}
             handleRemoveNote={this.props.handleRemoveNote}
+            handleUpdateNote={this.props.handleUpdateNote}
             />
+            </li>
           );
         })
       }
@@ -27,3 +29,5 @@ export default class NoteList extends React.Component {
     );
   }
 }
+
+export default NoteList;

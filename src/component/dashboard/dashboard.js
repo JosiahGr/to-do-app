@@ -40,17 +40,27 @@ export default class Dashboard extends React.Component {
     });
   }
 
+  handleUpdateNote(noteToUpdate) {
+    return this.setState((previousState) => {
+      return {
+        notes: previousState.notes.map(note =>
+          (note.id === noteToUpdate.id ? noteToUpdate : note)),
+      };
+    });
+  }
+
   render() {
     return (
       <section className="dashboard">
         <h1>Dashboard</h1>
         <NoteForm
-          handleAddNote={this.handleAddNote} 
+          handleComplete={this.handleAddNote} 
         />
         <p> All notes: </p>
         <NoteList
         notes={this.state.notes}
         handleRemoveNote={this.handleRemoveNote}
+        handleUpdateNote={this.handleUpdateNote}
         />
         { this.state.error && <h2 className="error">You must enter a title.</h2> }
       </section>

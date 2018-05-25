@@ -1,13 +1,13 @@
 import React from 'react';
-import { configure, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import Dashboard from './../component/dashboard/dashboard';
+import { configure as configureEnzyme, shallow as enzymeShallowMount } from 'enzyme';
+import Dashboard from '../component/dashboard/dashboard';
 
-configure({ adapter: new Adapter() });
+configureEnzyme({ adapter: new Adapter() });
 
 describe('Dashboard testing', () => {
   test('Simple test for initial state', () => {
-    const mountedDashboard = mount(<Dashboard />);
+    const mountedDashboard = enzymeShallowMount(<Dashboard />);
     expect(mountedDashboard.state('notes')).toEqual([]);
   });
 });
